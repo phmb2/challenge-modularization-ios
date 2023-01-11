@@ -10,7 +10,6 @@ import UIKit
 import Components
 
 protocol HomeViewDelegate: AnyObject {
-
     func didSelectActivity()
 }
 
@@ -19,7 +18,6 @@ class HomeView: UIView {
     weak var delegate: HomeViewDelegate?
 
     let stackView: UIStackView = {
-
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -28,19 +26,16 @@ class HomeView: UIView {
     }()
 
     let homeHeaderView: HomeHeaderView = {
-
         let homeHeaderView = HomeHeaderView()
         return homeHeaderView
     }()
 
     lazy var activityListView: ActivityListView = {
-
         let activityListView = ActivityListView()
         activityListView.translatesAutoresizingMaskIntoConstraints = false
         activityListView.delegate = self
         return activityListView
     }()
-
 
     init() {
         super.init(frame: .zero)
@@ -52,7 +47,7 @@ class HomeView: UIView {
         stackView.setCustomSpacing(32, after: homeHeaderView)
         addSubview(stackView)
 
-        let estimatedHeight = CGFloat(activityListView.tableView.numberOfRows(inSection: 0))*ActivityListView.cellSize
+        let estimatedHeight = CGFloat(activityListView.tableView.numberOfRows(inSection: 0)) * ActivityListView.cellSize
 
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
@@ -63,15 +58,15 @@ class HomeView: UIView {
         ])
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        return nil
     }
 }
 
 extension HomeView: ActivityListViewDelegate {
 
     func didSelectedActivity() {
-
         delegate?.didSelectActivity()
     }
 }

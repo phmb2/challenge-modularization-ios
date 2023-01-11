@@ -9,27 +9,34 @@ import UIKit
 import UserProfile
 import ActivityDetails
 
-class HomeViewController: UIViewController {
+public final class HomeViewController: UIViewController {
 
     lazy var homeView: HomeView = {
-
         let homeView = HomeView()
         homeView.delegate = self
         return homeView
     }()
 
-    override func viewDidLoad() {
-
+    public override func viewDidLoad() {
+        super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(openProfile))
     }
 
-    override func loadView() {
+    public override func loadView() {
         self.view = homeView
+    }
+    
+    public init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        return nil
     }
 
     @objc
     func openProfile() {
-
         let navigationController = UINavigationController(rootViewController: UserProfileViewController())
         self.present(navigationController, animated: true)
     }
@@ -38,7 +45,6 @@ class HomeViewController: UIViewController {
 extension HomeViewController: HomeViewDelegate {
 
     func didSelectActivity() {
-
         let activityDetailsViewController = ActivityDetailsViewController()
         self.navigationController?.pushViewController(activityDetailsViewController, animated: true)
     }
